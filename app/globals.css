@@ -26,6 +26,10 @@ a {
   text-decoration: none;
 }
 
+img {
+  max-width: 100%;
+}
+
 .hero {
   position: relative;
   min-height: 100svh;
@@ -348,11 +352,13 @@ a.hero-person-card:focus-visible {
 
 .hero-person-visual {
   grid-row: 1 / span 2;
-  align-self: stretch;
+  align-self: start;
   overflow: hidden;
   display: grid;
   place-items: center;
-  min-height: 112px;
+  width: 100%;
+  min-height: 0;
+  aspect-ratio: 1;
   border-radius: 3px;
   color: #11121a;
   background: var(--contributor-color);
@@ -466,6 +472,16 @@ a.hero-person-card:focus-visible {
   margin: 0 auto;
 }
 
+.release-card,
+.poster-link {
+  min-width: 0;
+  width: 100%;
+}
+
+.poster-link {
+  display: block;
+}
+
 .release-card:nth-child(2) {
   margin-top: 0;
 }
@@ -474,6 +490,8 @@ a.hero-person-card:focus-visible {
   position: relative;
   display: block;
   overflow: hidden;
+  width: 100%;
+  aspect-ratio: 1;
   background: #d6d3cc;
   box-shadow: 0 25px 65px rgba(18,20,35,.18);
 }
@@ -490,8 +508,9 @@ a.hero-person-card:focus-visible {
 .poster-frame img {
   display: block;
   width: 100%;
-  aspect-ratio: 1;
+  height: 100%;
   object-fit: cover;
+  object-position: center;
   transition: transform .8s cubic-bezier(.2,.8,.2,1), filter .5s ease;
 }
 
@@ -1487,9 +1506,13 @@ footer p {
 }
 
 @media (max-width: 560px) {
+  body {
+    overflow-x: hidden;
+  }
+
   .hero {
     min-height: auto;
-    padding-bottom: 22px;
+    padding: 22px 18px 26px;
   }
 
   .edition {
@@ -1528,6 +1551,35 @@ footer p {
 
   .hero-person-grid {
     grid-template-columns: 1fr;
+  }
+
+  .hero-person-card {
+    min-height: 0;
+    grid-template-columns: 76px minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    gap: 8px 12px;
+    padding: 12px;
+  }
+
+  .hero-person-visual {
+    grid-row: 1 / span 2;
+  }
+
+  .hero-person-copy small {
+    margin-bottom: 5px;
+  }
+
+  .hero-person-copy strong {
+    font-size: 18px;
+  }
+
+  .hero-person-copy p {
+    margin-top: 5px;
+    line-height: 1.45;
+  }
+
+  .hero-person-platform {
+    grid-column: 2;
   }
 
   .chapter-stack > a {
@@ -1591,6 +1643,22 @@ footer p {
     display: block;
   }
 
+  .releases {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .poster-grid {
+    width: 100%;
+    max-width: 360px;
+    gap: 46px;
+  }
+
+  .release-meta h3 {
+    overflow-wrap: anywhere;
+    font-size: clamp(26px, 9vw, 38px);
+  }
+
   .release-meta > span,
   .release-meta > a {
     display: inline-block;
@@ -1608,6 +1676,16 @@ footer p {
 
   .contributor-card {
     min-height: 320px;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero-person-card {
+    grid-template-columns: 66px minmax(0, 1fr);
+  }
+
+  .poster-grid {
+    max-width: 100%;
   }
 }
 

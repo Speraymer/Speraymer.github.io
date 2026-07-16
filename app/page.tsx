@@ -37,9 +37,9 @@ const contributors = [
     role: "发行厂牌",
     description: "负责专辑发行与相关发行协作。",
     color: "#E9B642",
-    image: "",
-    href: "",
-    platform: "LABEL",
+    image: "/contributors/florasonans.jpg",
+    href: "https://www.beatarray.cn/label/FloraSonans",
+    platform: "节奏阵列",
   },
 ];
 
