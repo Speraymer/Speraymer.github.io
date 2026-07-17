@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import FloatingAudioPlayer from "./floating-audio-player";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://speraymer.github.io";
 
@@ -36,7 +37,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN">
-      <body>{children}</body>
+      <body>
+        {children}
+        <FloatingAudioPlayer />
+      </body>
     </html>
   );
 }
