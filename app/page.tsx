@@ -143,7 +143,7 @@ export default function Home() {
       <section className="releases" id="pre-release" aria-labelledby="release-title">
         <div className="section-heading">
           <div>
-            <p>RELEASED SINGLES · 02 / 05</p>
+            <p>RELEASED SINGLES · {String(releasedTracks.length).padStart(2, "0")} / 05</p>
             <h2 id="release-title">已发行单曲如下</h2>
           </div>
           <p className="section-note">点击封面，前往网易云音乐。</p>

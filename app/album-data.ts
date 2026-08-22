@@ -10,6 +10,7 @@ export type Track = {
   synopsis: string;
   authorNote: string;
   creditRoles?: Record<string, string>;
+  additionalCredits?: { name: string; role: string }[];
   lyrics?: LyricLine[][];
 };
 
@@ -174,7 +175,62 @@ export const chapters: Chapter[] = [
     color: "#8F9CFF",
     colorName: "幽雨紫",
     narrative: "当快乐不再是唯一答案，敏感、犹疑与失落开始进入旋律。第三阶段允许情绪停留，也让成长第一次拥有阴影和重量。",
-    tracks: [],
+    tracks: [
+      {
+        title: "Last Time Us",
+        cover: "/covers/last-time-us.jpg",
+        href: "https://music.163.com/song?id=3423404924",
+        artists: ["Speraymer", "阿希axi", "FloraSonans 花海织声"],
+        duration: "02:58",
+        releaseDate: "2026.08.21",
+        synopsis: "可还记得最后一场午后的光，斜斜困在窗棂与粉笔灰之间。课桌浮成沉默的孤岛，走廊向远处漫长地退去。我们把名字写进渐暗的金色里，故作轻快地冲下楼梯，仿佛只要跑得足够快，告别便追不上来。\n铃声终究落下，储物柜合上最后一扇门。那一天我们没有哭，只是低下头，把尚未来得及归还的青春戴成一顶借来的王冠。原来毕业并不是突然长大，而是从某一刻起，“我们”被风轻轻拆散，各自走进往后的漫长。\n\nFrom《Rewind:Young》Chapter.III\n\"一帘幽雨，湿了琴心\"",
+        authorNote: "《Last Time Us》写的是毕业那一天。它没有把离别写成一场喧闹的告别，而是把目光留在粉笔灰、窗棂、楼梯与储物柜这些再平常不过的事物上。直到铃声落下，我们才意识到，那或许是最后一次以“我们”的名义站在一起。所谓长大，不只是奔向未来，也是在尚未准备好的时候，学会把共同的青春还给时间。",
+        creditRoles: {
+          "阿希axi": "编曲 · 作曲",
+        },
+        additionalCredits: [
+          { name: "Calyst", role: "封面" },
+          { name: "Byouelahw白柚", role: "封面" },
+          { name: "_Warpcore_", role: "封面" },
+          { name: "i-Snow", role: "封面" },
+          { name: "不定期", role: "专辑 Logo" },
+        ],
+        lyrics: [
+          [
+            { en: "The chalk dust settled like a forgotten prayer", zh: "粉笔灰落定，如被遗忘的祈祷" },
+            { en: "The desks were islands in a sea of air", zh: "课桌是空气之海中的孤岛" },
+            { en: "We traced the lines we couldn't cross", zh: "我们描摹着无法跨越的界线" },
+            { en: "And counted breaths we thought we'd lost", zh: "数着那些以为早已丢失的呼吸" },
+            { en: "The windows held the afternoon", zh: "窗棂囚禁了整个午后" },
+            { en: "A golden cage, a fading tune", zh: "金色的牢笼，渐弱的旋律" },
+            { en: "We knew the bell would break the spell", zh: "我们知道铃声会打破这魔咒" },
+            { en: "But none of us could say farewell", zh: "但没有一人能说出再见" },
+          ],
+          [
+            { en: "This is the last day we were us", zh: "这是我们曾是我们的最后一天" },
+            { en: "Before the wind began to rush", zh: "在风开始奔涌之前" },
+            { en: "We wrote our names in fading light", zh: "我们在渐暗的光线里写下名字" },
+            { en: "And held on tight, held on tight", zh: "紧紧握住，紧紧握住" },
+          ],
+          [
+            { en: "We took the stairs two at a time", zh: "我们一步两级地冲下楼梯" },
+            { en: "As if we could outrun the climb", zh: "仿佛能逃离这场攀爬本身" },
+            { en: "We laughed at all the things we feared", zh: "我们对所有恐惧报以大笑" },
+            { en: "And swore the future disappeared", zh: "发誓未来已消失不见" },
+            { en: "The lockers slammed their final doors", zh: "储物柜摔上最后的门" },
+            { en: "The hallways stretched like ocean floors", zh: "走廊延伸如海床般无垠" },
+            { en: "We didn't cry, we just looked down", zh: "我们没有哭，只是低下头" },
+            { en: "And wore our youth like a borrowed crown", zh: "将青春戴成一顶借来的王冠" },
+          ],
+          [
+            { en: "This is the last day we were us", zh: "这是我们曾是我们的最后一天" },
+            { en: "Before the wind began to rush", zh: "在风开始奔涌之前" },
+            { en: "We wrote our names in fading light", zh: "我们在渐暗的光线里写下名字" },
+            { en: "And held on tight, held on tight", zh: "紧紧握住，紧紧握住" },
+          ],
+        ],
+      },
+    ],
   },
   {
     slug: "edge-before-dawn",
@@ -211,9 +267,11 @@ export function getChapter(slug: string) {
 }
 
 export function getTrackCredits(track: Track) {
-  return track.artists.map((name) => {
+  const artistCredits = track.artists.map((name) => {
     if (name === "Speraymer") return { name, role: "编曲" };
     if (name.includes("花海织声")) return { name, role: "厂牌" };
     return { name, role: track.creditRoles?.[name] ?? "主创信息待补" };
   });
+
+  return [...artistCredits, ...(track.additionalCredits ?? [])];
 }
